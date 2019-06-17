@@ -9,7 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PHONES_SUCCESS:
-      return R.merge(state,R.pluck('id', action.payload))
+      return {...state, ids: R.pluck('id', action.payload)}
     default:
       return state
   }
