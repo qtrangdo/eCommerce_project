@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { fetchPhones, loadMorePhones } from '../actions/actions';
+import { fetchPhones, loadMorePhones, addPhoneToBasket } from '../actions/actions';
 import { getPhones } from './helpers/selectors';
 
 class Phones extends Component {
@@ -12,6 +12,7 @@ class Phones extends Component {
     }
 
     renderPhone(phone, index) {
+        const { addPhoneToBasket } = this.props;
         const shortDesc = phone.desscription;
         return (
             <div className="col-sm-4 col-lg-4 col-md-4 book-list" key={index}>
@@ -29,7 +30,7 @@ class Phones extends Component {
                     </h4>
                     <p>{shortDesc}</p>
                     <p className="itemButton">
-                        <button className="btn btn-primary">Buy Now!</button>
+                        <button className="btn btn-primary" onClick={() => addPhoneToBasket(phone.id)}>Buy Now!</button>
                         <Link to={`/phone/${phone.id}`} className="btn btn-default">More info</Link>
                     </p>
                 </div>
@@ -69,7 +70,8 @@ class Phones extends Component {
 
 const mapDispatchToProps = {
     fetchPhones,
-    loadMorePhones
+    loadMorePhones,
+    addPhoneToBasket
 }
 
 const mapStateToProps = (state) => ({
@@ -80,5 +82,6 @@ Phones.propTypes = {
     fetchPhones: PropTypes.func.isRequired,
     phones: PropTypes.array.isRequired,
     loadMorePhones: PropTypes.func.isRequired,
+    // addPhoneToBasket: PropTypes.func.isRequired,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Phones);
