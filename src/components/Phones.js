@@ -40,19 +40,29 @@ class Phones extends Component {
     render() {
         const { phones, loadMorePhones } = this.props;
         return (
-            <div>
-                <div className="books row">
-                    {phones.map((phone, index) => this.renderPhone(phone, index))}
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <button
-                            onClick={loadMorePhones}
-                            className="pull-right btn btn-primary"
-                        >Load More</button>
+            <div className="view-container">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-3">
+                            Sidebar
+                        </div>
+                        <div className="col-md-9">
+                            <div className="books row">
+                                {phones.map((phone, index) => this.renderPhone(phone, index))}
+                            </div>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <button
+                                        onClick={loadMorePhones}
+                                        className="pull-right btn btn-primary"
+                                    >Load More</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         )
     }
 }
