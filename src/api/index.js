@@ -1,9 +1,13 @@
 import phones from './mockPhones'
 
-const fetchPhoneApi = async () => {
+export const fetchPhoneApi = async () => {
   return new Promise(resolve => {
     resolve(phones)
   })
 }
 
-export default  fetchPhoneApi;
+export const loadMorePhonesApi = async ({offset}) => {
+  return new Promise(resolve => {
+    resolve(phones)
+  })
+}

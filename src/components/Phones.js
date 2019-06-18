@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {fetchPhones} from '../actions/actions';
-import {getPhones} from './helpers/selectors';
+import { fetchPhones, loadMorePhones } from '../actions/actions';
+import { getPhones } from './helpers/selectors';
 
 class Phones extends Component {
     componentDidMount() {
@@ -11,12 +11,12 @@ class Phones extends Component {
         this.props.fetchPhones();
     }
 
-    renderPhone (phone, index) {
+    renderPhone(phone, index) {
         const shortDesc = phone.desscription;
-        return  (
+        return (
             <div className="col-sm-4 col-lg-4 col-md-4 book-list" key={index}>
                 <div className="thumbnail">
-                    <img 
+                    <img
                         className="img-thumbnail"
                         src={phone.image}
                         alt={phone.name}
@@ -38,17 +38,28 @@ class Phones extends Component {
     }
 
     render() {
-        const {phones} = this.props;
+        const { phones, loadMorePhones } = this.props;
         return (
-            <div className="books row">
-                {phones.map((phone, index) => this.renderPhone(phone, index))}
+            <div>
+                <div className="books row">
+                    {phones.map((phone, index) => this.renderPhone(phone, index))}
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <button
+                            onClick={loadMorePhones}
+                            className="pull-right btn btn-primary"
+                        >Load More</button>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 const mapDispatchToProps = {
-    fetchPhones
+    fetchPhones,
+    loadMorePhones
 }
 
 const mapStateToProps = (state) => ({
@@ -57,6 +68,7 @@ const mapStateToProps = (state) => ({
 
 Phones.propTypes = {
     fetchPhones: PropTypes.func.isRequired,
-    phones: PropTypes.array.isRequired
+    phones: PropTypes.array.isRequired,
+    loadMorePhones: PropTypes.func.isRequired,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Phones);
