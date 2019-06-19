@@ -28,3 +28,5 @@ export const getTotalPrice = state => {
 }
 
 export const getCategories = state => R.values(state.categories);
+
+export const getActiveCategoryId = ownProps => ownProps.match.params.id;

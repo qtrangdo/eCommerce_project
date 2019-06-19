@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import { getCategories } from './helpers/selectors';
+import { getCategories, getActiveCategoryId } from './helpers/selectors';
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, activeCategoryId }) => {
+  console.log(activeCategoryId)
   const renderCategory = (category, index) => (
     <Link 
       to={`/categories/${category.id}`}
@@ -22,12 +24,19 @@ const Categories = ({ categories }) => {
   )
 }
 
-const mapStateToProps = state => ({
-  categories: getCategories(state)
+const mapStateToProps = (state, ownProps) => ({
+  categories: getCategories(state),
+  activeCategoryId: getActiveCategoryId(ownProps)
 })
 
 Categories.propTypes = {
   categories: PropTypes.arrayOf(String).isRequired,
+  activeCategoryId: PropTypes.string.isRequired
 }
 
-export default connect(mapStateToProps, null)(Categories);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, null)
+)(Categories)
+
+// export default connect(mapStateToProps, null)(Categories);
