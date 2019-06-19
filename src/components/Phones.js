@@ -83,6 +83,6 @@ Phones.propTypes = {
     fetchPhones: PropTypes.func.isRequired,
     phones: PropTypes.array.isRequired,
     loadMorePhones: PropTypes.func.isRequired,
-    // addPhoneToBasket: PropTypes.func.isRequired,
+    addPhoneToBasket: PropTypes.func.isRequired,
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Phones);

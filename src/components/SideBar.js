@@ -1,8 +1,9 @@
 import React from 'react';
+import BasketCart from './BasketCart';
 
 const SideBar = () => (
   <div>
-    Side Bar
+    <BasketCart />
   </div>
 )
 
