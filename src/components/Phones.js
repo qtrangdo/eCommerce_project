@@ -77,8 +77,8 @@ const mapDispatchToProps = {
     addPhoneToBasket
 }
 
-const mapStateToProps = (state) => ({
-    phones: getPhones(state)
+const mapStateToProps = (state, ownProps) => ({
+    phones: getPhones(state, ownProps)
 })
 
 Phones.propTypes = {
