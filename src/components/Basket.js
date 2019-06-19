@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import R from 'ramda';
 import PropTypes from 'prop-types';
 
-import { removePhoneFromBasket } from '../actions/actions';
+import { removePhoneFromBasket, cleanBasket, basketCheckOut } from '../actions/actions';
 import { getBasketPhonesWithCount, getTotalBasketPrice } from './helpers/selectors';
 
-const Basket = ({ phones, totalPrice, removePhoneFromBasket }) => {
+const Basket = ({ phones, totalPrice, removePhoneFromBasket, cleanBasket, basketCheckOut }) => {
   const isBasketEmpty = R.isEmpty(phones)
   const renderContent = () => (
     <div>
@@ -27,7 +28,7 @@ const Basket = ({ phones, totalPrice, removePhoneFromBasket }) => {
                 <td>${phone.price}</td>
                 <td>{phone.count}</td>
                 <td>
-                  <span 
+                  <span
                     onClick={() => removePhoneFromBasket(phone.id)}
                     className="delete-cart"
                   ></span>
@@ -50,7 +51,23 @@ const Basket = ({ phones, totalPrice, removePhoneFromBasket }) => {
 
   const renderSideBar = () => (
     <div>
-      SideBar
+      <Link className="btn btn-info" to='/'>
+        <span className='glyphicon glyicon-info-sign' />
+        <span>Continue shopping</span>
+      </Link>
+      {
+        !isBasketEmpty &&
+        <div>
+          <button onClick={() => cleanBasket()} className="btn btn-danger">
+            <span className="glyphicon glyphicon-trash" />
+            {" "}Clean cart
+          </button>
+          <button onClick={() => basketCheckOut(phones)} className="btn btn-success">
+            <span className="glyphicon glyphicon-envelope"/>
+            {" "}Check Out
+          </button>
+        </div>
+      }
     </div>
   )
 
@@ -76,13 +93,17 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  removePhoneFromBasket
+  removePhoneFromBasket,
+  cleanBasket,
+  basketCheckOut
 }
 
 Basket.propTypes = {
   phones: PropTypes.array.isRequired,
-  totalPrice: PropTypes.string.isRequired,
-  removePhoneFromBasket: PropTypes.func.isRequired
+  totalPrice: PropTypes.number.isRequired,
+  removePhoneFromBasket: PropTypes.func.isRequired,
+  cleanBasket: PropTypes.func.isRequired,
+  basketCheckOut: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Basket);

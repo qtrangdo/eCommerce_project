@@ -48,5 +48,9 @@ export const getBasketPhonesWithCount = state => {
   return phones;
 }
 
-export const getTotalBasketPrice = () => {};
+export const getTotalBasketPrice = (state) => {
+  const phones = getBasketPhonesWithCount(state);
+  const totalPrice = phones.reduce((acc, phone) => acc + (phone.count * phone.price), 0)
+  return totalPrice
+};
 
