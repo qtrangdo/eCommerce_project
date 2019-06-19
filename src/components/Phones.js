@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchPhones, loadMorePhones, addPhoneToBasket } from '../actions/actions';
 import { getPhones } from './helpers/selectors';
+import SideBar from './SideBar';
 
 class Phones extends Component {
     componentDidMount() {
@@ -45,7 +46,7 @@ class Phones extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-3">
-                            Sidebar
+                            <SideBar />
                         </div>
                         <div className="col-md-9">
                             <div className="books row">
