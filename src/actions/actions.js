@@ -12,7 +12,8 @@ import {
   SEARCH_PHONE,
   FETCH_CATEGORIES_START,
   FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_FAILED
+  FETCH_CATEGORIES_FAILED,
+  REMOVE_PHONE_FROM_BASKET
 } from './actionTypes';
 
 import {fetchPhonesApi, loadMorePhonesApi, fetchPhoneByIdApi, fetchCategoriesApi} from '../api/index';
@@ -99,4 +100,11 @@ export const fetchCategories = () => async (dispatch) => {
       error: true
     })
   }
+}
+
+export const removePhoneFromBasket = id => async(dispatch) => {
+  dispatch({
+    type: REMOVE_PHONE_FROM_BASKET,
+    payload: id
+  })
 }

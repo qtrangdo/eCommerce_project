@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import R from 'ramda';
 import PropTypes from 'prop-types';
 
+import { removePhoneFromBasket } from '../actions/actions';
 import { getBasketPhonesWithCount, getTotalBasketPrice } from './helpers/selectors';
 
-const Basket = ({ phones, totalPrice }) => {
+const Basket = ({ phones, totalPrice, removePhoneFromBasket }) => {
   const isBasketEmpty = R.isEmpty(phones)
   const renderContent = () => (
     <div>
@@ -27,7 +27,10 @@ const Basket = ({ phones, totalPrice }) => {
                 <td>${phone.price}</td>
                 <td>{phone.count}</td>
                 <td>
-                  <span className="delete-cart"></span>
+                  <span 
+                    onClick={() => removePhoneFromBasket(phone.id)}
+                    className="delete-cart"
+                  ></span>
                 </td>
               </tr>
             ))}
@@ -72,9 +75,14 @@ const mapStateToProps = state => ({
   totalPrice: getTotalBasketPrice(state)
 })
 
-Basket.propTypes = {
-  phones: PropTypes.array.isRequired,
-  totalPrice: PropTypes.string.isRequired
+const mapDispatchToProps = {
+  removePhoneFromBasket
 }
 
-export default connect(mapStateToProps, null)(Basket);
+Basket.propTypes = {
+  phones: PropTypes.array.isRequired,
+  totalPrice: PropTypes.string.isRequired,
+  removePhoneFromBasket: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Basket);
