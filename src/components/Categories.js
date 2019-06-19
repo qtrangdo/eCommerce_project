@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import R from 'ramda';
 import classNames from 'classnames';
 import { getCategories, getActiveCategoryId } from './helpers/selectors';
-import { link } from 'fs';
 
 const Categories = ({ categories, activeCategoryId }) => {
   const renderCategory = (category, index) => {
