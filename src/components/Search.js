@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { searchPhone } from '../actions/actions'
 
 class Search extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       value: ''
     }
@@ -26,7 +26,7 @@ class Search extends Component {
       <div className="well blosd">
         <h3 className="lead">Quick Shop</h3>
         <div className="input-group">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit.bind(this)}>
             <input
               onChange={this.handleChange.bind(this)}
               type="text"
