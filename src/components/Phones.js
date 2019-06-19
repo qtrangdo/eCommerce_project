@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { fetchPhones, loadMorePhones, addPhoneToBasket } from '../actions/actions';
+import { fetchPhones, loadMorePhones, addPhoneToBasket, fetchCategories } from '../actions/actions';
 import { getPhones } from './helpers/selectors';
 import SideBar from './SideBar';
 
@@ -10,6 +10,7 @@ class Phones extends Component {
     componentDidMount() {
         // fetch phone data
         this.props.fetchPhones();
+        this.props.fetchCategories();
     }
 
     renderPhone(phone, index) {
@@ -71,6 +72,7 @@ class Phones extends Component {
 
 const mapDispatchToProps = {
     fetchPhones,
+    fetchCategories,
     loadMorePhones,
     addPhoneToBasket
 }
@@ -81,6 +83,7 @@ const mapStateToProps = (state) => ({
 
 Phones.propTypes = {
     fetchPhones: PropTypes.func.isRequired,
+    fetchCategories: PropTypes.func.isRequired,
     phones: PropTypes.array.isRequired,
     loadMorePhones: PropTypes.func.isRequired,
     addPhoneToBasket: PropTypes.func.isRequired,

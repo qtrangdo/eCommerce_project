@@ -7,6 +7,7 @@ import Phone from './Phone';
 const App = ({ location }) => (
   <div>
     <Route path="/" location={location} exact component={Phones} />
+    <Route path="/categories/:id" location={location} exact component={Phones} />
     <Route path="/phone/:id" location={location} exact component={Phone} />
   </div>
 );
