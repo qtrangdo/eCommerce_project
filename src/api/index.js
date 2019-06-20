@@ -3,9 +3,12 @@ import phones from './mockPhones';
 import categories from './mockCategories';
 
 export const fetchPhonesApi = async () => {
-  return new Promise(resolve => {
-    resolve(phones)
-  })
+  // return new Promise(resolve => {
+  //   resolve(phones)
+  // })
+  const fetchResponse = await fetch('https://www.mocky.io/v2/5998a6120f00008d0106f0b4');
+  let body = await fetchResponse.json();
+  return body.phones;
 }
 
 export const loadMorePhonesApi = async ({offset}) => {
